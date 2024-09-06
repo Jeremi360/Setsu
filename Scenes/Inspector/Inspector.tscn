@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://bs6fdfics53ud"]
+
+[ext_resource type="Script" path="res://Scenes/Inspector/SidePanelNodeDetails.gd" id="1_5kwsd"]
+[ext_resource type="Texture2D" uid="uid://c7vdr4e0mxst6" path="res://Assets/Icons/close_icon.png" id="2_b6poi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28b4a"]
+content_margin_left = 7.0
+content_margin_right = 7.0
+bg_color = Color(0.768627, 0.180392, 0.25098, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Inspector" type="VBoxContainer"]
+offset_left = 909.442
+offset_top = 44.2
+offset_right = 1419.44
+offset_bottom = 670.2
+script = ExtResource("1_5kwsd")
+
+[node name="IDContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="LineEditID" type="LineEdit" parent="IDContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 11
+placeholder_text = "id"
+
+[node name="TFHBtn" type="Button" parent="IDContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 14
+theme_override_styles/focus = SubResource("StyleBoxFlat_28b4a")
+theme_override_styles/normal = SubResource("StyleBoxFlat_28b4a")
+text = "Test from here"
+
+[node name="TextureButton" type="TextureButton" parent="IDContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_b6poi")
+stretch_mode = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10

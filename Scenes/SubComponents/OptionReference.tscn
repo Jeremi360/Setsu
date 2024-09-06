@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dqivnwp0bw2ux"]
 
-[ext_resource type="Script" path="res://Scripts/SubComponents/OptionReference.gd" id="1_me3e4"]
+[ext_resource type="Script" path="res://Scenes/SubComponents/OptionReference.gd" id="1_me3e4"]
 [ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="2_eby50"]
 [ext_resource type="Resource" uid="uid://74bogqdd04tt" path="res://Test/Data/markdown_settings.tres" id="3_uf7kh"]
 

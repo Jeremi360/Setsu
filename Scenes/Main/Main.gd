@@ -1,8 +1,6 @@
 extends Control
 
-var upload_mode := "dialogue"
 var dialog = {}
-var dialog_for_localisation = []
 var emoji_finder: Window
 var icon_search: Window
 
@@ -634,7 +632,6 @@ func _on_new_file_btn_pressed():
 		
 	return await file_selected(new_file_path, 0)
 
-
 func _on_open_file_btn_pressed():
 	$WelcomeWindow.hide()
 	var new_file_path = await open_file_select()
@@ -643,7 +640,6 @@ func _on_open_file_btn_pressed():
 		return
 		
 	return await file_selected(new_file_path, 1)
-
 
 func _on_help_id_pressed(id):
 	match id:
@@ -674,63 +670,6 @@ func _on_icons_btn_pressed():
 
 func get_current_tab_name() -> String:
 	return tab_bar.get_tab_title(tab_bar.current_tab)
-
-func download_dialogue():
-	var data = JSON.stringify(_to_dict(), "\t", false, true)
-	JavaScriptBridge.download_buffer(
-		data.to_utf8_buffer(),
-		get_current_tab_name(),
-		"application/json"
-	)
-
-func download_db():
-	var current_tab := get_current_graph_edit()
-	var db: Dictionary = current_tab.db_to_dict()
-	var db_data := JSON.stringify(db, "\t", false, true)
-	var db_path: String = current_tab.db_file_path
-	db_path = Array(db_path.split("/", false)).back()
-	JavaScriptBridge.download_buffer(
-		db_data.to_utf8_buffer(), db_path,
-		"application/json"
-	)
-
-func _on_upload_file_btn_pressed():
-	upload_mode = "dialogue"
-	html_file_dialogue.show()
-
-func upload_file(file: HTML5FileHandle) -> String:
-	var text := await file.as_text()
-	var cloud_file_path := "user://" + file.name
-	var cloud_file = FileAccess.open(
-		cloud_file_path, FileAccess.WRITE)
-	cloud_file.store_string(text)
-	cloud_file.close()
-	return cloud_file_path
-
-func _on_html_5_file_dialog_file_selected(file: HTML5FileHandle):
-	$WelcomeWindow.hide()
-	var current_tab := get_current_graph_edit()
-	match upload_mode:
-		"dialogue":
-			new_graph_edit()
-			file_selected(await upload_file(file), 1)
-		"db":
-			side_panel_node.hide()
-			current_tab.load_db(await upload_file(file))
-			side_panel_node.show_config()
-
-func _on_sync_id_pressed(id: int):
-	match id:
-		0: # UploadDialogue
-			upload_mode = "dialogue"
-			html_file_dialogue.show()
-		1: # Upload DB
-			upload_mode = "db"
-			html_file_dialogue.show()
-		2: # Download Dialogue
-			download_dialogue()
-		3: # Download DB
-			download_db()
 
 func _on_edit_conf_btn_toggled(toggled_on):
 	if toggled_on: side_panel_node.show_config()

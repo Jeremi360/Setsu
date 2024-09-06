@@ -22,9 +22,9 @@ config/icon="res://icon.png"
 
 [autoload]
 
-uuid="*res://Scripts/Global/UUID.gd"
-Util="*res://Scripts/Global/Util.gd"
-GlobalVariables="*res://Scripts/Global/GlobalVariables.gd"
+uuid="*res://Scripts/Globals/UUID.gd"
+Util="*res://Scripts/Globals/Util.gd"
+GlobalVariables="*res://Scripts/Globals/GlobalVariables.gd"
 SfxLoader="*res://Test/Scripts/SfxLoader.gd"
 AdvancedText="*res://addons/advanced-text/AdvancedText.gd"
 MaterialIconsDB="*res://addons/material-design-icons/icons/icons.gd"
@@ -47,13 +47,9 @@ folder_colors={
 "res://Assets/": "orange",
 "res://Examples/": "purple",
 "res://Scenes/": "yellow",
-"res://Scenes/GraphNodes/": "green",
-"res://Scenes/SidePanelNodes/": "teal",
+"res://Scenes/RakuNodes/": "green",
 "res://Scenes/SubComponents/": "blue",
 "res://Scripts/": "yellow",
-"res://Scripts/GraphNodes/": "green",
-"res://Scripts/SidePanelNodes/": "teal",
-"res://Scripts/SubComponents/": "blue",
 "res://Test/": "red"
 }
 
