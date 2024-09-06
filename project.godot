@@ -12,8 +12,8 @@ config_version=5
 
 config/name="Setsu"
 config/version="1.0"
-run/main_scene="res://Scenes/App.tscn"
-config/features=PackedStringArray("4.2")
+run/main_scene="res://Scenes/Main/Main.tscn"
+config/features=PackedStringArray("4.3")
 run/low_processor_mode=true
 boot_splash/bg_color=Color(0.117647, 0.133333, 0.164706, 1)
 boot_splash/image="res://icon.png"
@@ -39,18 +39,17 @@ window/size/fullscreen=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/advanced-text/plugin.cfg", "res://addons/emojis-for-godot/plugin.cfg", "res://addons/material-design-icons/plugin.cfg", "res://addons/dictionary_inspector/plugin.cfg", "res://addons/open_external_editor/plugin.cfg")
+enabled=PackedStringArray("res://addons/advanced-text/plugin.cfg", "res://addons/dictionary_inspector/plugin.cfg", "res://addons/emojis-for-godot/plugin.cfg", "res://addons/material-design-icons/plugin.cfg")
 
 [file_customization]
 
 folder_colors={
 "res://Assets/": "orange",
 "res://Examples/": "purple",
-"res://Objects/": "yellow",
-"res://Objects/GraphNodes/": "green",
-"res://Objects/SidePanelNodes/": "teal",
-"res://Objects/SubComponents/": "blue",
 "res://Scenes/": "yellow",
+"res://Scenes/GraphNodes/": "green",
+"res://Scenes/SidePanelNodes/": "teal",
+"res://Scenes/SubComponents/": "blue",
 "res://Scripts/": "yellow",
 "res://Scripts/GraphNodes/": "green",
 "res://Scripts/SidePanelNodes/": "teal",
@@ -72,7 +71,7 @@ theme/lcd_subpixel_layout=0
 
 Save={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":true,"meta_pressed":false,"pressed":false,"keycode":83,"physical_keycode":83,"key_label":83,"unicode":0,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":true,"meta_pressed":false,"pressed":false,"keycode":83,"physical_keycode":83,"key_label":83,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 
