@@ -55,18 +55,21 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="NewFileBtn" type="Button" parent="PanelContainer/CenterContainer/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "New File"
 icon = ExtResource("2_rymve")
 
 [node name="OpenFileBtn" type="Button" parent="PanelContainer/CenterContainer/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Open File..."
 icon = ExtResource("3_ktkps")
 
 [node name="CancelFileBtn" type="Button" parent="PanelContainer/CenterContainer/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -83,10 +86,12 @@ text = "Recent files"
 label_settings = SubResource("LabelSettings_1l82f")
 
 [node name="ButtonContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer/VBoxContainer2/RecentFilesContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="VersionLabel" type="Label" parent="PanelContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8

@@ -1,10 +1,46 @@
 extends Window
+class_name WelcomeWindow
 
+@export var recent_file_button: PackedScene
+
+var on_recent_file: Callable
 
 func _ready():
-	$PanelContainer/VersionLabel.text = "v" + ProjectSettings.get("application/config/version")
-	
+	var version: String = ProjectSettings.get("application/config/version")
+	%VersionLabel.text = "v%s" % version
+	Globals.main.resized.connect(move_to_center)
 
-func _on_control_resized():
-	var new_pos: Vector2 = get_parent().get_window().get_size_with_decorations() / 2 - size / 2
-	position = new_pos
+func add_recent_file_button(path: String):
+	var btn: Button = recent_file_button.instantiate()
+	var btn_text = path
+	btn_text = path.replace("\\", "/")
+	btn_text = btn_text.replace("//", "/")
+	btn_text = btn_text.split("/")
+	
+	if btn_text.size() >= 2:
+		btn_text = btn_text.slice(-2, btn_text.size())
+		btn_text = btn_text[0].path_join(btn_text[1])
+	else:
+		btn_text = btn_text.back()
+
+	btn.text = btn_text
+	btn.pressed.connect(on_recent_file.bind(path, 1))
+	%RecentFilesContainer.add_child(btn)
+
+func load_recent_files():
+	%RecentFilesContainer.hide()
+	if not FileAccess.file_exists(Globals.HISTORY_FILE_PATH):
+		FileAccess.open(Globals.HISTORY_FILE_PATH, FileAccess.WRITE)
+		return
+	
+	var file := FileAccess.open(
+		Globals.HISTORY_FILE_PATH, FileAccess.READ)
+	var raw_data := file.get_as_text()
+	if raw_data:
+		var data: Array = JSON.parse_string(raw_data)
+		for path in data:
+			if FileAccess.file_exists(path): continue
+			data.erase(path)
+		for path in data.slice(0, 3):
+			add_recent_file_button(path)
+		%RecentFilesContainer.show()

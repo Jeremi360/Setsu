@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bsfr18fogqxnt" path="res://Assets/Icons/NodesIcons/Condition.svg" id="7_nh0w0"]
 [ext_resource type="Texture2D" uid="uid://cii2dk8aqnx3m" path="res://Assets/Icons/NodesIcons/Cog.svg" id="8_hffb8"]
 [ext_resource type="Texture2D" uid="uid://kqhi8rimv1go" path="res://Assets/Icons/NodesIcons/Exit.svg" id="8_hudw3"]
-[ext_resource type="Script" path="res://Scenes/Inspector/SidePanelNodeDetails.gd" id="9_cxmnj"]
+[ext_resource type="Script" path="res://Scenes/Inspector/Inspector.gd" id="9_cxmnj"]
 [ext_resource type="Texture2D" uid="uid://dl3u1xdqd3d66" path="res://Assets/Icons/NodesIcons/Event.svg" id="10_2h2fa"]
 [ext_resource type="PackedScene" path="res://Objects/GraphEdit.tscn" id="10_qja7f"]
 [ext_resource type="Texture2D" uid="uid://bh1xpymnqcl5d" path="res://Assets/Icons/help_icon.png" id="11_bl0px"]

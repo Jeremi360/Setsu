@@ -1,47 +1,39 @@
 extends Control
+class_name Main
 
-var dialog = {}
+var dialog := {}
 var emoji_finder: Window
 var icon_search: Window
 
-const HISTORY_FILE_PATH: String = "user://history.save"
-const emoji_finder_path := \
-"res://addons/emojis-for-godot/EmojiPanel/EmojiPanel.tscn"
-const icon_finder_script := \
-	"res://addons/material-design-icons/icon_finder/IconFinder.tscn"
+@export var graph_edit_scene: PackedScene
 
-@onready var graph_edit_inst = preload("res://Objects/GraphEdit.tscn")
-@onready var root_node = preload("res://Objects/GraphNodes/RootNode.tscn")
-@onready var sentence_node = preload("res://Objects/GraphNodes/SentenceNode.tscn")
-@onready var dice_roll_node = preload("res://Objects/GraphNodes/DiceRollNode.tscn")
-@onready var choice_node = preload("res://Objects/GraphNodes/ChoiceNode.tscn")
-@onready var end_node = preload("res://Objects/GraphNodes/EndPathNode.tscn")
-@onready var bridge_in_node = preload("res://Objects/GraphNodes/BridgeInNode.tscn")
-@onready var bridge_out_node = preload("res://Objects/GraphNodes/BridgeOutNode.tscn")
-@onready var condition_node = preload("res://Objects/GraphNodes/ConditionNode.tscn")
-@onready var action_node = preload("res://Objects/GraphNodes/ActionNode.tscn")
-@onready var comment_node = preload("res://Objects/GraphNodes/CommentNode.tscn")
-@onready var event_node = preload("res://Objects/GraphNodes/EventNode.tscn")
-@onready var option_panel = preload("res://Objects/SubComponents/OptionNode.tscn")
+@export_subgroup("Plugins", "plugin_")
+@export var plugin_emoji_finder: PackedScene
+@export var plugin_icon_finder: PackedScene
 
-@onready var recent_file_button = preload("res://Objects/SubComponents/RecentFileButton.tscn")
+@export_subgroup("Nodes Scenes")
+@export var init_node: PackedScene
+@export var sentence_node: PackedScene
+@export var dice_roll_node: PackedScene
+@export var choice_node: PackedScene
+@export var end_node: PackedScene
+@export var bridge_in_node: PackedScene
+@export var bridge_out_node: PackedScene
+@export var condition_node: PackedScene
+@export var action_node: PackedScene
+@export var comment_node: PackedScene
+@export var event_node: PackedScene
 
-@onready var tab_bar: TabBar = $MarginContainer/MainContainer/GraphEditsArea/VBoxContainer/TabBar
-@onready var graph_edits: Control = $MarginContainer/MainContainer/GraphEditsArea/VBoxContainer/GraphEdits
-@onready var side_panel_node := $MarginContainer/MainContainer/GraphEditsArea/MarginContainer/SidePanelNodeDetails
-@onready var saved_notification := $MarginContainer/MainContainer/Header/SavedNotification
-@onready var graph_node_selecter := $GraphNodeSelecter
-@onready var save_progress_bar: ProgressBar = $MarginContainer/MainContainer/Header/SaveProgressBarContainer/SaveProgressBar
-@onready var save_button: Button = $MarginContainer/MainContainer/Header/Save
-@onready var test_button: Button = $MarginContainer/MainContainer/Header/TestBtnContainer/Test
+@onready var tab_bar: TabBar = %TabBar
+@onready var graph_edits: TabContainer = %GraphEdits
+@onready var inspector_panel := %Inspector
+@onready var graph_node_selecter := %GraphNodeSelecter
+@onready var save_button: Button = %SaveBtn
+@onready var save_progress_bar: ProgressBar = %SaveProgressBar
+@onready var saved_notification := %SavedNotification
+@onready var test_button: Button = %TestBtn
+@onready var edit_conf_btn := %EditConfBtn
 @onready var add_menu_bar := $MarginContainer/MainContainer/Header/MenuBar/Add
-@onready var recent_files_container := $WelcomeWindow/PanelContainer/CenterContainer/VBoxContainer2/RecentFilesContainer
-@onready var recent_files_button_container := $WelcomeWindow/PanelContainer/CenterContainer/VBoxContainer2/RecentFilesContainer/ButtonContainer
-@onready var cancel_file_btn := $WelcomeWindow/PanelContainer/CenterContainer/VBoxContainer2/HBoxContainer/CancelFileBtn
-@onready var html_file_dialogue := $HTML5FileDialog
-@onready var sync_menu := $MarginContainer/MainContainer/Header/MenuBar/Sync
-@onready var edit_conf_btn := $MarginContainer/MainContainer/Header/TestBtnContainer/EditConfBtn
-@onready var upload_btn := $WelcomeWindow/PanelContainer/CenterContainer/VBoxContainer2/HBoxContainer/UploadFileBtn
 
 var live_dict: Dictionary
 
@@ -58,79 +50,38 @@ var picker_from_node
 var picker_from_port
 var picker_position
 
-
 func _ready():
-	var new_root_node = root_node.instantiate()
+	Globals.main = self
+	var new_root_node = init_node.instantiate()
 	get_current_graph_edit().add_child(new_root_node)
 	connect_graph_edit_signal(get_current_graph_edit())
 
-	if OS.get_name().to_lower() != "web":
-		sync_menu.queue_free()
-		html_file_dialogue.queue_free()
-		upload_btn.queue_free()
-
-	icon_search = load(icon_finder_script).instantiate()
+	icon_search = plugin_icon_finder.instantiate()
 	icon_search.hide()
 	add_child.call_deferred(icon_search)
 	
-	emoji_finder = load(emoji_finder_path).instantiate()
+	emoji_finder = plugin_emoji_finder.instantiate()
 	emoji_finder.hide()
 	add_child.call_deferred(emoji_finder)
 
 	saved_notification.hide()
 	save_progress_bar.hide()
-	
-	# Load recent files
-	if not FileAccess.file_exists(HISTORY_FILE_PATH):
-		FileAccess.open(HISTORY_FILE_PATH, FileAccess.WRITE)
-		recent_files_container.hide()
-	else:
-		var file = FileAccess.open(HISTORY_FILE_PATH, FileAccess.READ)
-		var raw_data = file.get_as_text()
-		if raw_data:
-			var data: Array = JSON.parse_string(raw_data)
-			for path in data:
-				if FileAccess.file_exists(path):
-					continue
-				data.erase(path)
-			for path in data.slice(0, 3):
-				var btn: Button = recent_file_button.instantiate()
-				var btn_text = path
-				btn_text = path.replace("\\", "/")
-				btn_text = btn_text.replace("//", "/")
-				btn_text = btn_text.split("/")
-				
-				if btn_text.size() >= 2:
-					btn_text = btn_text.slice(-2, btn_text.size())
-					btn_text = btn_text[0].path_join(btn_text[1])
-				else:
-					btn_text = btn_text.back()
-				
-				if OS.get_name().to_lower() == "web":
-					btn_text = btn_text.trim_prefix("user:/")
 
-				btn.text = btn_text
-				btn.pressed.connect(file_selected.bind(path, 1))
-				recent_files_button_container.add_child(btn)
-			recent_files_container.show()
-		else:
-			recent_files_container.hide()
+	$WelcomeWindow.on_recent_file = file_selected
+	$WelcomeWindow.load_recent_files()
 	
 	$WelcomeWindow.show()
 	$NoInteractions.show()
 
-
 func _shortcut_input(event):
 	if event.is_action_pressed("Save"):
 		save(false)
-
 
 func get_current_graph_edit() -> GraphEdit:
 	return graph_edits.get_child(tab_bar.current_tab)
 
 func get_graph_nodes() -> Array[Node]:
 	return get_current_graph_edit().get_children()
-
 
 func _to_dict() -> Dictionary:
 	var list_nodes = []
@@ -213,14 +164,14 @@ func file_selected(path, open_mode):
 	if open_mode == 0: # NEW
 		for node in graph_edit.get_children():
 			node.queue_free()
-		var new_root_node = root_node.instantiate()
+		var new_root_node = init_node.instantiate()
 		graph_edit.add_child(new_root_node)
 		await save(true)
 
-	if not FileAccess.file_exists(HISTORY_FILE_PATH):
-		FileAccess.open(HISTORY_FILE_PATH, FileAccess.WRITE)
+	if not FileAccess.file_exists(Globals.HISTORY_FILE_PATH):
+		FileAccess.open(Globals.HISTORY_FILE_PATH, FileAccess.WRITE)
 	else:
-		var file: FileAccess = FileAccess.open(HISTORY_FILE_PATH, FileAccess.READ_WRITE)
+		var file: FileAccess = FileAccess.open(Globals.HISTORY_FILE_PATH, FileAccess.READ_WRITE)
 		var raw_data = file.get_as_text()
 		var data: Array
 		if raw_data:
@@ -233,7 +184,7 @@ func file_selected(path, open_mode):
 			if FileAccess.file_exists(p):
 				continue
 			data.erase(p)
-		file = FileAccess.open(HISTORY_FILE_PATH, FileAccess.WRITE)
+		file = FileAccess.open(Globals.HISTORY_FILE_PATH, FileAccess.WRITE)
 		file.store_string(JSON.stringify(data.slice(0, 10)))
 	
 	load_project(path)
@@ -311,7 +262,7 @@ func load_project(path):
 		graph_edit.speakers = data.get("Characters")
 		graph_edit.variables = data.get("Variables")
 	
-	# alert("loaded db: %s" % graph_edit.db_to_dict())
+	# alert("loaded db: %s" % graph_edit_scene.db_to_dict())
 	
 	for node in graph_edit.get_children():
 		node.queue_free()
@@ -326,7 +277,7 @@ func load_project(path):
 		var new_node
 		match node.get("$type"):
 			"NodeRoot":
-				new_node = root_node.instantiate()
+				new_node = init_node.instantiate()
 			"NodeSentence":
 				new_node = sentence_node.instantiate()
 			"NodeChoice":
@@ -394,7 +345,7 @@ func load_project(path):
 	root_node_ref = get_root_node_ref()
 	
 	if not root_node_ref:
-		var new_root_node = root_node.instantiate()
+		var new_root_node = init_node.instantiate()
 		get_current_graph_edit().add_child(new_root_node)
 		
 		save(true)
@@ -496,7 +447,7 @@ func test_project(from_selected_node: bool = false):
 	var test_scene = test_instance.instantiate()
 	
 	if from_selected_node:
-		test_scene._from_node_id = side_panel_node.current_panel.id
+		test_scene._from_node_id = inspector_panel.current_panel.id
 	
 	get_tree().root.add_child(test_scene)
 
@@ -557,7 +508,7 @@ func _on_graph_node_selecter_close_requested():
 
 
 func tab_changed(_idx):
-	side_panel_node.hide()
+	inspector_panel.hide()
 	if get_current_tab_name() != "+":
 		for ge in graph_edits.get_children():
 			ge.visible = graph_edits.get_child(
@@ -566,7 +517,7 @@ func tab_changed(_idx):
 		return
 	
 	new_graph_edit()
-	cancel_file_btn.show()
+	# cancel_file_btn.show()
 	$WelcomeWindow.show()
 	$NoInteractions.show()
 
@@ -575,8 +526,8 @@ func connect_graph_edit_signal(graph_edit: GraphEdit) -> void:
 	graph_edit.connect("connection_to_empty", _on_graph_edit_connection_to_empty)
 	graph_edit.connect("connection_request", _on_graph_edit_connection_request)
 	graph_edit.connect("disconnection_request", _on_graph_edit_disconnection_request)
-	graph_edit.connect("node_selected", side_panel_node.on_graph_node_selected)
-	graph_edit.connect("node_deselected", side_panel_node.on_graph_node_deselected)
+	graph_edit.connect("node_selected", inspector_panel.on_graph_node_selected)
+	graph_edit.connect("node_deselected", inspector_panel.on_graph_node_deselected)
 
 
 func tab_close_pressed(tab):
@@ -610,8 +561,8 @@ func _on_file_id_pressed(id):
 			return
 
 func new_graph_edit():
-	var graph_edit: GraphEdit = graph_edit_inst.instantiate()
-	var new_root_node = root_node.instantiate()
+	var graph_edit: GraphEdit = graph_edit_scene.instantiate()
+	var new_root_node = init_node.instantiate()
 	
 	graph_edit.name = "new"
 	connect_graph_edit_signal(graph_edit)
@@ -672,8 +623,8 @@ func get_current_tab_name() -> String:
 	return tab_bar.get_tab_title(tab_bar.current_tab)
 
 func _on_edit_conf_btn_toggled(toggled_on):
-	if toggled_on: side_panel_node.show_config()
-	else: side_panel_node.hide()
+	if toggled_on: inspector_panel.show_config()
+	else: inspector_panel.hide()
 
 func _on_node_selected(node):
 	edit_conf_btn.button_pressed = (

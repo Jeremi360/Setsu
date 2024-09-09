@@ -24,7 +24,7 @@ config/icon="res://icon.png"
 
 uuid="*res://Scripts/Globals/UUID.gd"
 Util="*res://Scripts/Globals/Util.gd"
-GlobalVariables="*res://Scripts/Globals/GlobalVariables.gd"
+Globals="*res://Scripts/Globals/Globals.gd"
 SfxLoader="*res://Test/Scripts/SfxLoader.gd"
 AdvancedText="*res://addons/advanced-text/AdvancedText.gd"
 MaterialIconsDB="*res://addons/material-design-icons/icons/icons.gd"

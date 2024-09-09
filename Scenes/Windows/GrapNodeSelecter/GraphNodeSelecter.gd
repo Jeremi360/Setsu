@@ -1,6 +1,6 @@
 extends Window
 
-@export var control_node : Control
+@onready var control_node := Globals.main
 
 func _ready():
 	hide()

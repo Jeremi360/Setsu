@@ -1,22 +1,35 @@
-[gd_scene load_steps=30 format=3 uid="uid://d3hdy18rgmt4f"]
+[gd_scene load_steps=43 format=3 uid="uid://d3hdy18rgmt4f"]
 
 [ext_resource type="Script" path="res://Scenes/Main/Main.gd" id="1_g460d"]
+[ext_resource type="PackedScene" uid="uid://bni8w3a3pcbwn" path="res://addons/emojis-for-godot/EmojiPanel/EmojiPanel.tscn" id="2_5qsdq"]
 [ext_resource type="Texture2D" uid="uid://3cbk6gtd8pis" path="res://Assets/Icons/NodesIcons/Sentence.svg" id="2_71o2r"]
 [ext_resource type="Texture2D" uid="uid://cpirwf2kaphk0" path="res://Assets/Icons/NodesIcons/Multiple Choice.svg" id="3_1oahl"]
+[ext_resource type="PackedScene" uid="uid://bni8w3a3pcbwn" path="res://addons/material-design-icons/icon_finder/IconFinder.tscn" id="3_sf20f"]
+[ext_resource type="PackedScene" uid="uid://dqsnkyn3r76m4" path="res://Scenes/RakuNodes/InitNode/InitNode.tscn" id="3_ylrnp"]
 [ext_resource type="Texture2D" uid="uid://duc8w81evfnqw" path="res://Assets/Icons/NodesIcons/DiceRoll.svg" id="4_ahyg4"]
+[ext_resource type="PackedScene" uid="uid://cifg2nritn8t6" path="res://Scenes/RakuNodes/SentenceNode/SentenceNode.tscn" id="4_j00oc"]
+[ext_resource type="PackedScene" uid="uid://b6mcmodpmsacw" path="res://Scenes/RakuNodes/RollDiceNode/DiceRollNode.tscn" id="5_0np2a"]
 [ext_resource type="Texture2D" uid="uid://bmfs6iest7723" path="res://Assets/Icons/NodesIcons/Link.svg" id="5_81ruw"]
 [ext_resource type="Texture2D" uid="uid://bsfr18fogqxnt" path="res://Assets/Icons/NodesIcons/Condition.svg" id="6_5jqdi"]
+[ext_resource type="PackedScene" uid="uid://coq74c18uq3d3" path="res://Scenes/RakuNodes/ChoiceNode/ChoiceNode.tscn" id="6_edf61"]
+[ext_resource type="PackedScene" uid="uid://c3t0igg4s2pne" path="res://Scenes/RakuNodes/EndPathNode/EndPathNode.tscn" id="7_fc8uv"]
 [ext_resource type="Texture2D" uid="uid://cii2dk8aqnx3m" path="res://Assets/Icons/NodesIcons/Cog.svg" id="7_pyyyb"]
 [ext_resource type="Texture2D" uid="uid://kqhi8rimv1go" path="res://Assets/Icons/NodesIcons/Exit.svg" id="8_d2dpg"]
+[ext_resource type="PackedScene" uid="uid://b0eo5lvnrwidu" path="res://Scenes/RakuNodes/BridgeNodes/BridgeInNode.tscn" id="8_ewa0n"]
 [ext_resource type="Texture2D" uid="uid://dl3u1xdqd3d66" path="res://Assets/Icons/NodesIcons/Event.svg" id="9_0ijkl"]
+[ext_resource type="PackedScene" uid="uid://c75iblt2kuvr2" path="res://Scenes/RakuNodes/BridgeNodes/BridgeOutNode.tscn" id="9_e8l47"]
+[ext_resource type="PackedScene" uid="uid://dsv566w4evo8b" path="res://Scenes/RakuNodes/ConditionNode/ConditionNode.tscn" id="10_2eyvw"]
 [ext_resource type="Texture2D" uid="uid://dia7vp7k000po" path="res://Assets/Icons/NodesIcons/Comment.png" id="10_3huac"]
+[ext_resource type="PackedScene" uid="uid://c02gpa5cixyfm" path="res://Scenes/RakuNodes/ActionNode/ActionNode.tscn" id="11_dmuao"]
 [ext_resource type="Texture2D" uid="uid://bh1xpymnqcl5d" path="res://Assets/Icons/help_icon.png" id="11_p64xj"]
+[ext_resource type="PackedScene" uid="uid://b4ptsysoq7mgm" path="res://Scenes/RakuNodes/CommentNode/CommentNode.tscn" id="12_k13f8"]
 [ext_resource type="Texture2D" uid="uid://bl0hk7s0pdeuk" path="res://addons/advanced-text/icons/md.svg" id="12_x3l62"]
 [ext_resource type="Texture2D" uid="uid://d2e2kxb6bfi02" path="res://addons/emojis-for-godot/icon.png" id="13_0yqlp"]
+[ext_resource type="PackedScene" uid="uid://bwfykyaajuu4i" path="res://Scenes/RakuNodes/EventNode/EventNode.tscn" id="13_yi7g0"]
 [ext_resource type="Texture2D" uid="uid://c0mm85a01jrvn" path="res://addons/material-design-icons/nodes/MaterialIcon.svg" id="14_2cg31"]
 [ext_resource type="Texture2D" uid="uid://bexlgpgwakbrr" path="res://Assets/Icons/NodesIcons/Arrow02.svg" id="15_3xgpb"]
 [ext_resource type="Texture2D" uid="uid://c7vdr4e0mxst6" path="res://Assets/Icons/close_icon.png" id="16_nvvba"]
-[ext_resource type="PackedScene" path="res://Scenes/Inspector/Inspector.tscn" id="17_j76i2"]
+[ext_resource type="PackedScene" uid="uid://bs6fdfics53ud" path="res://Scenes/Inspector/Inspector.tscn" id="17_j76i2"]
 [ext_resource type="PackedScene" uid="uid://cnxiel383ygmn" path="res://Scenes/Windows/GrapNodeSelecter/graph_node_selecter.tscn" id="18_arap7"]
 [ext_resource type="Theme" uid="uid://budfhk1hudcfj" path="res://Assets/MainTheme.tres" id="19_c4sc2"]
 [ext_resource type="PackedScene" uid="uid://bb3x8klcnp57t" path="res://Scenes/Windows/WelcomeWindow/welcome_window.tscn" id="20_pa5mq"]
@@ -135,6 +148,19 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_g460d")
+plugin_emoji_finder = ExtResource("2_5qsdq")
+plugin_icon_finder = ExtResource("3_sf20f")
+init_node = ExtResource("3_ylrnp")
+sentence_node = ExtResource("4_j00oc")
+dice_roll_node = ExtResource("5_0np2a")
+choice_node = ExtResource("6_edf61")
+end_node = ExtResource("7_fc8uv")
+bridge_in_node = ExtResource("8_ewa0n")
+bridge_out_node = ExtResource("9_e8l47")
+condition_node = ExtResource("10_2eyvw")
+action_node = ExtResource("11_dmuao")
+comment_node = ExtResource("12_k13f8")
+event_node = ExtResource("13_yi7g0")
 
 [node name="MainContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -167,18 +193,6 @@ item_1/text = "New"
 item_1/id = 1
 item_2/text = "Save"
 item_2/id = 2
-
-[node name="Sync" type="PopupMenu" parent="MainContainer/Header/MenuBar"]
-transparent_bg = true
-size = Vector2i(179, 112)
-item_count = 4
-item_0/text = "Upload Dialogue"
-item_1/text = "Upload DB"
-item_1/id = 1
-item_2/text = "Download Dialogue"
-item_2/id = 2
-item_3/text = "Download DB"
-item_3/id = 3
 
 [node name="Add" type="PopupMenu" parent="MainContainer/Header/MenuBar"]
 size = Vector2i(119, 100)
@@ -224,7 +238,8 @@ layout_mode = 2
 theme_override_constants/separation = 0
 theme_override_styles/separator = SubResource("StyleBoxFlat_ux1f6")
 
-[node name="Save" type="Button" parent="MainContainer/Header"]
+[node name="SaveBtn" type="Button" parent="MainContainer/Header"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -237,6 +252,7 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_bottom = 2
 
 [node name="SaveProgressBar" type="ProgressBar" parent="MainContainer/Header/SaveProgressBarContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -247,39 +263,42 @@ rounded = true
 show_percentage = false
 
 [node name="SavedNotification" type="Label" parent="MainContainer/Header"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "SAVED"
 label_settings = SubResource("LabelSettings_gptd3")
 vertical_alignment = 1
 
-[node name="TestBtnContainer" type="HBoxContainer" parent="MainContainer/Header"]
+[node name="Buttons" type="HBoxContainer" parent="MainContainer/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 15
 alignment = 2
 
-[node name="EmojisBtn" type="Button" parent="MainContainer/Header/TestBtnContainer"]
+[node name="EmojisBtn" type="Button" parent="MainContainer/Header/Buttons"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 14
 text = "Find Emoji"
 icon = ExtResource("13_0yqlp")
 
-[node name="IconsBtn" type="Button" parent="MainContainer/Header/TestBtnContainer"]
+[node name="IconsBtn" type="Button" parent="MainContainer/Header/Buttons"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 14
 text = "Find Material Icon"
 icon = ExtResource("14_2cg31")
 
-[node name="EditConfBtn" type="CheckButton" parent="MainContainer/Header/TestBtnContainer"]
+[node name="EditConfBtn" type="CheckButton" parent="MainContainer/Header/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 14
 text = "Edit Config"
 icon = ExtResource("7_pyyyb")
 
-[node name="Test" type="Button" parent="MainContainer/Header/TestBtnContainer"]
+[node name="TestBtn" type="Button" parent="MainContainer/Header/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 14
@@ -303,6 +322,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="TabBar" type="TabBar" parent="MainContainer/GraphEditsArea/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -314,6 +334,7 @@ tab_count = 1
 tab_0/title = "+"
 
 [node name="GraphEdits" type="TabContainer" parent="MainContainer/GraphEditsArea/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
@@ -322,6 +343,7 @@ clip_tabs = false
 tabs_visible = false
 
 [node name="Inspector" parent="MainContainer/GraphEditsArea" instance=ExtResource("17_j76i2")]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -344,7 +366,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.196078)
 
-[node name="GraphNodeSelecter" parent="." instance=ExtResource("18_arap7")]
+[node name="GraphNodeSelector" parent="." instance=ExtResource("18_arap7")]
+unique_name_in_owner = true
 
 [node name="FileDialog" type="FileDialog" parent="."]
 initial_position = 2
@@ -356,14 +379,13 @@ filters = PackedStringArray("*.json")
 [node name="WelcomeWindow" parent="." instance=ExtResource("20_pa5mq")]
 
 [connection signal="id_pressed" from="MainContainer/Header/MenuBar/File" to="." method="_on_file_id_pressed"]
-[connection signal="id_pressed" from="MainContainer/Header/MenuBar/Sync" to="." method="_on_sync_id_pressed"]
 [connection signal="id_pressed" from="MainContainer/Header/MenuBar/Add" to="." method="_on_add_id_pressed"]
 [connection signal="id_pressed" from="MainContainer/Header/MenuBar/Help" to="." method="_on_help_id_pressed"]
-[connection signal="pressed" from="MainContainer/Header/Save" to="." method="save"]
-[connection signal="pressed" from="MainContainer/Header/TestBtnContainer/EmojisBtn" to="." method="_on_emojis_btn_pressed"]
-[connection signal="pressed" from="MainContainer/Header/TestBtnContainer/IconsBtn" to="." method="_on_icons_btn_pressed"]
-[connection signal="toggled" from="MainContainer/Header/TestBtnContainer/EditConfBtn" to="." method="_on_edit_conf_btn_toggled"]
-[connection signal="pressed" from="MainContainer/Header/TestBtnContainer/Test" to="." method="test_project"]
+[connection signal="pressed" from="MainContainer/Header/SaveBtn" to="." method="save"]
+[connection signal="pressed" from="MainContainer/Header/Buttons/EmojisBtn" to="." method="_on_emojis_btn_pressed"]
+[connection signal="pressed" from="MainContainer/Header/Buttons/IconsBtn" to="." method="_on_icons_btn_pressed"]
+[connection signal="toggled" from="MainContainer/Header/Buttons/EditConfBtn" to="." method="_on_edit_conf_btn_toggled"]
+[connection signal="pressed" from="MainContainer/Header/Buttons/TestBtn" to="." method="test_project"]
 [connection signal="tab_changed" from="MainContainer/GraphEditsArea/VBoxContainer/TabBar" to="." method="tab_changed"]
 [connection signal="tab_close_pressed" from="MainContainer/GraphEditsArea/VBoxContainer/TabBar" to="." method="tab_close_pressed"]
 [connection signal="canceled" from="FileDialog" to="." method="_on_file_dialog_canceled"]
