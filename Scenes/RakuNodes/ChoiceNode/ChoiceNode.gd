@@ -8,7 +8,7 @@ extends MonologueGraphNode
 const arrow_texture01 = preload("res://Assets/Icons/NodesIcons/Arrow01.svg")
 const arrow_texture02 = preload("res://Assets/Icons/NodesIcons/Arrow02.svg")
 
-@onready var option_reference = preload("res://Objects/SubComponents/OptionReference.tscn")
+@export var option_reference : PackedScene
 
 var options = []
 
