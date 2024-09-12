@@ -104,18 +104,16 @@ func _on_child_entered_tree(node: Node):
 	if node is RootNode or not node is GraphNode:
 		return
 	
-	var node_header = node.get_children(true)[0]
-	var close_btn: TextureButton = close_button.instantiate()
-	close_btn.connect("pressed", free_graphnode.bind(node))
-	node_header.add_child(close_btn)
+	# var node_header = node.get_children(true)[0]
+	# var close_btn: TextureButton = close_button.instantiate()
+	# close_btn.connect("pressed", free_graphnode.bind(node))
+	# node_header.add_child(close_btn)
 
 func shorten_db_path(path: String):
 	db_file_path = path
 	var monologue_json: String = file_path
 	var monologue_base_dir = monologue_json.get_base_dir() + "/"
-	if OS.get_name().to_lower() == "web":
-		monologue_base_dir = monologue_base_dir.trim_prefix("user://")
-
+	
 	if db_file_path.begins_with(monologue_base_dir):
 		db_file_path = path.trim_prefix(monologue_base_dir)
 

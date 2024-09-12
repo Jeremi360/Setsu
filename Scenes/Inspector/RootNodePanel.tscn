@@ -15,6 +15,7 @@ script = ExtResource("1_pf2u6")
 layout_mode = 2
 
 [node name="LineEditDB" type="LineEdit" parent="DataBaseContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Choose data base json to load/save"
@@ -37,15 +38,6 @@ script = ExtResource("3_lyuff")
 icon_name = "folder-open"
 icon_size = 20
 
-[node name="UploadDB" type="Button" parent="DataBaseContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_8mwas")
-theme_override_font_sizes/font_size = 20
-text = "󰁞"
-script = ExtResource("3_lyuff")
-icon_name = "arrow-up-thick"
-icon_size = 20
-
 [node name="CharactersMainContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
@@ -56,6 +48,7 @@ size_flags_vertical = 0
 text = "Characters"
 
 [node name="CharactersContainer" type="VBoxContainer" parent="CharactersMainContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
@@ -79,6 +72,7 @@ size_flags_vertical = 0
 text = "Variables"
 
 [node name="VariablesContainer" type="VBoxContainer" parent="VariablesMainContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
@@ -92,25 +86,8 @@ script = ExtResource("3_lyuff")
 icon_name = "plus-thick"
 icon_size = 20
 
-[node name="FileDialogSave" type="FileDialog" parent="."]
-size = Vector2i(777, 600)
-ok_button_text = "Save"
-access = 2
-filters = PackedStringArray("*.json")
-
-[node name="FileDialogOpen" type="FileDialog" parent="."]
-title = "Open a File"
-size = Vector2i(777, 600)
-ok_button_text = "Open"
-file_mode = 0
-access = 2
-filters = PackedStringArray("*.json")
-
 [connection signal="text_submitted" from="DataBaseContainer/LineEditDB" to="." method="_on_line_edit_db_text_submitted"]
 [connection signal="pressed" from="DataBaseContainer/NewDB" to="." method="_on_save_db_pressed"]
 [connection signal="pressed" from="DataBaseContainer/LoadDB" to="." method="_on_load_db_pressed"]
-[connection signal="pressed" from="DataBaseContainer/UploadDB" to="." method="_on_upload_db_pressed"]
 [connection signal="pressed" from="CharactersMainContainer/Add" to="." method="add_character"]
 [connection signal="pressed" from="VariablesMainContainer/Add" to="." method="add_variable"]
-[connection signal="file_selected" from="FileDialogSave" to="." method="_on_file_dialog_file_selected"]
-[connection signal="file_selected" from="FileDialogOpen" to="." method="_on_file_dialog_file_selected"]

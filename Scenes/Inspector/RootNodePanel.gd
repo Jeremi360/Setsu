@@ -6,18 +6,14 @@ extends VBoxContainer
 var file_dialog: FileDialog
 
 @onready
-var line_edit_db := $DataBaseContainer/LineEditDB
-@onready var upload_btn := $DataBaseContainer/UploadDB
+var line_edit_db : LineEdit = %LineEditDB
+@onready
+var characters_container : VBoxContainer = %CharactersContainer
+@onready
+var variables_container : VBoxContainer = %VariablesContainer
 
-@onready
-var character_node = preload("res://Objects/SubComponents/Character.tscn")
-@onready
-var characters_container = $CharactersMainContainer/CharactersContainer
-
-@onready
-var variable_node = preload("res://Objects/SubComponents/Variable.tscn")
-@onready
-var variables_container = $VariablesMainContainer/VariablesContainer
+@export var character_node : PackedScene
+@export var variable_node : PackedScene
 
 var graph_node
 var id = ""
@@ -31,10 +27,6 @@ func _ready():
 		add_variable(true, variable)
 	
 	line_edit_db.text = graph_node.get_parent().db_file_path
-	if OS.get_name().to_lower() == "web":
-		line_edit_db.text = line_edit_db.text.trim_prefix("user://")
-	else:
-		upload_btn.hide()
 
 func _from_dict(dict):
 	id = dict.get("ID")
@@ -78,11 +70,9 @@ func add_variable(init: bool = false, dict: Dictionary = {}):
 	
 		new_node.update_value_edit()
 
-
 ## Call the update_speakers function when a character node is updated
 func text_submitted_callback(_new_text):
 	update_speakers()
-
 
 ## Update the GraphEdit speakers variable based on all character nodes
 func update_speakers():
@@ -97,7 +87,6 @@ func update_speakers():
 		updated_speakers.append(child._to_dict())
 		
 	graph_node.get_parent().speakers = updated_speakers
-
 
 ## Update the GraphEdit variables variable based on all variables nodes
 func update_variables():
@@ -114,14 +103,9 @@ func update_variables():
 
 func _on_save_db_pressed():
 	file_dialog = $FileDialogSave
-	if OS.get_name().to_lower() == "web":
-		file_dialog.access = FileDialog.ACCESS_USERDATA
 	file_dialog.popup_centered()
 
 func _on_load_db_pressed():
-	file_dialog = $FileDialogOpen
-	if OS.get_name().to_lower() == "web":
-		file_dialog.access = FileDialog.ACCESS_USERDATA
 	file_dialog.popup_centered()
 
 func _on_file_dialog_file_selected(path):
@@ -144,12 +128,8 @@ func _on_file_dialog_file_selected(path):
 				add_variable(true, variable)
 
 	line_edit_db.text = graph_node.get_parent().db_file_path
-	if OS.get_name().to_lower() == "web":
-		line_edit_db.text = line_edit_db.text.trim_prefix("user://")
 
 func _on_line_edit_db_text_submitted(new_text: String):
-	if OS.get_name().to_lower() == "web":
-		new_text = "user://" + new_text
 	graph_node.get_parent().load_db(new_text)
 
 func _on_upload_db_pressed():
