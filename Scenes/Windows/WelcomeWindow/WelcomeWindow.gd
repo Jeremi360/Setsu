@@ -8,6 +8,7 @@ var on_recent_file: Callable
 func _ready():
 	var version: String = ProjectSettings.get("application/config/version")
 	%VersionLabel.text = "v%s" % version
+	await Globals.main_is_ready
 	Globals.main.resized.connect(move_to_center)
 
 func add_recent_file_button(path: String):
@@ -44,3 +45,25 @@ func load_recent_files():
 		for path in data.slice(0, 3):
 			add_recent_file_button(path)
 		%RecentFilesContainer.show()
+
+func _on_new_file_btn_pressed() -> void:
+	hide()
+	Globals.file_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
+	Globals.file_dialog.title = "Crate New Dialogue File"
+	Globals.file_dialog.filters = ["*.json;Old files"]
+	Globals.file_dialog.ok_button_text = "Crate"
+	Globals.file_dialog.popup_centered()
+	var path := await Globals.file_selected as String
+	if path: Globals.main.file_selected(path, 0)
+	else: show()
+
+func _on_open_file_btn_pressed() -> void:
+	hide()
+	Globals.file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+	Globals.file_dialog.title = "Open Dialogue File"
+	Globals.file_dialog.filters = ["*.json;Old files"]
+	# Globals.file_dialog.ok_button_text = "Open"
+	Globals.file_dialog.popup_centered()
+	var path := await Globals.file_selected as String
+	if path: Globals.main.file_selected(path, 1)
+	else: show()

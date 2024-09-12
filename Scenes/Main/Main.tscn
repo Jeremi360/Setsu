@@ -1,8 +1,8 @@
-[gd_scene load_steps=43 format=3 uid="uid://d3hdy18rgmt4f"]
+[gd_scene load_steps=42 format=3 uid="uid://d3hdy18rgmt4f"]
 
 [ext_resource type="Script" path="res://Scenes/Main/Main.gd" id="1_g460d"]
-[ext_resource type="PackedScene" uid="uid://bni8w3a3pcbwn" path="res://addons/emojis-for-godot/EmojiPanel/EmojiPanel.tscn" id="2_5qsdq"]
 [ext_resource type="Texture2D" uid="uid://3cbk6gtd8pis" path="res://Assets/Icons/NodesIcons/Sentence.svg" id="2_71o2r"]
+[ext_resource type="PackedScene" uid="uid://bqjfdabrxujp7" path="res://Scenes/RakuGraphEdit/RakuGraphEdit.tscn" id="2_q2ymi"]
 [ext_resource type="Texture2D" uid="uid://cpirwf2kaphk0" path="res://Assets/Icons/NodesIcons/Multiple Choice.svg" id="3_1oahl"]
 [ext_resource type="PackedScene" uid="uid://bni8w3a3pcbwn" path="res://addons/material-design-icons/icon_finder/IconFinder.tscn" id="3_sf20f"]
 [ext_resource type="PackedScene" uid="uid://dqsnkyn3r76m4" path="res://Scenes/RakuNodes/InitNode/InitNode.tscn" id="3_ylrnp"]
@@ -31,7 +31,6 @@
 [ext_resource type="Texture2D" uid="uid://c7vdr4e0mxst6" path="res://Assets/Icons/close_icon.png" id="16_nvvba"]
 [ext_resource type="PackedScene" uid="uid://bs6fdfics53ud" path="res://Scenes/Inspector/Inspector.tscn" id="17_j76i2"]
 [ext_resource type="PackedScene" uid="uid://cnxiel383ygmn" path="res://Scenes/Windows/GrapNodeSelecter/graph_node_selecter.tscn" id="18_arap7"]
-[ext_resource type="Theme" uid="uid://budfhk1hudcfj" path="res://Assets/MainTheme.tres" id="19_c4sc2"]
 [ext_resource type="PackedScene" uid="uid://bb3x8klcnp57t" path="res://Scenes/Windows/WelcomeWindow/welcome_window.tscn" id="20_pa5mq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3npb4"]
@@ -148,7 +147,8 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_g460d")
-plugin_emoji_finder = ExtResource("2_5qsdq")
+graph_edit_scene = ExtResource("2_q2ymi")
+plugin_emoji_finder = ExtResource("3_sf20f")
 plugin_icon_finder = ExtResource("3_sf20f")
 init_node = ExtResource("3_ylrnp")
 sentence_node = ExtResource("4_j00oc")
@@ -176,6 +176,7 @@ theme_override_constants/h_separation = 15
 theme_override_constants/v_separation = 10
 
 [node name="MenuBar" type="MenuBar" parent="MainContainer/Header"]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 12
@@ -339,11 +340,18 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_3psvs")
+current_tab = 0
 clip_tabs = false
 tabs_visible = false
 
+[node name="RakuGraphEdit" parent="MainContainer/GraphEditsArea/VBoxContainer/GraphEdits" instance=ExtResource("2_q2ymi")]
+layout_mode = 2
+scroll_offset = Vector2(0, -24)
+metadata/_tab_index = 0
+
 [node name="Inspector" parent="MainContainer/GraphEditsArea" instance=ExtResource("17_j76i2")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -369,13 +377,6 @@ color = Color(0, 0, 0, 0.196078)
 [node name="GraphNodeSelector" parent="." instance=ExtResource("18_arap7")]
 unique_name_in_owner = true
 
-[node name="FileDialog" type="FileDialog" parent="."]
-initial_position = 2
-size = Vector2i(778, 450)
-theme = ExtResource("19_c4sc2")
-access = 2
-filters = PackedStringArray("*.json")
-
 [node name="WelcomeWindow" parent="." instance=ExtResource("20_pa5mq")]
 
 [connection signal="id_pressed" from="MainContainer/Header/MenuBar/File" to="." method="_on_file_id_pressed"]
@@ -388,4 +389,3 @@ filters = PackedStringArray("*.json")
 [connection signal="pressed" from="MainContainer/Header/Buttons/TestBtn" to="." method="test_project"]
 [connection signal="tab_changed" from="MainContainer/GraphEditsArea/VBoxContainer/TabBar" to="." method="tab_changed"]
 [connection signal="tab_close_pressed" from="MainContainer/GraphEditsArea/VBoxContainer/TabBar" to="." method="tab_close_pressed"]
-[connection signal="canceled" from="FileDialog" to="." method="_on_file_dialog_canceled"]

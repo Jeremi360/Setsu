@@ -1,9 +1,5 @@
-extends Control
 class_name Main
-
-var dialog := {}
-var emoji_finder: Window
-var icon_search: Window
+extends Control
 
 @export var graph_edit_scene: PackedScene
 
@@ -27,25 +23,27 @@ var icon_search: Window
 @onready var tab_bar: TabBar = %TabBar
 @onready var graph_edits: TabContainer = %GraphEdits
 @onready var inspector_panel := %Inspector
-@onready var graph_node_selecter := %GraphNodeSelecter
+@onready var graph_node_selecter := %GraphNodeSelector
 @onready var save_button: Button = %SaveBtn
 @onready var save_progress_bar: ProgressBar = %SaveProgressBar
 @onready var saved_notification := %SavedNotification
 @onready var test_button: Button = %TestBtn
 @onready var edit_conf_btn := %EditConfBtn
-@onready var add_menu_bar := $MarginContainer/MainContainer/Header/MenuBar/Add
+@onready var add_menu_bar := %MenuBar/Add
+
+var emoji_finder: Window
+var icon_search: Window
 
 var live_dict: Dictionary
-
-var initial_pos = Vector2(40, 40)
-var option_index = 0
-var node_index = 0
-var all_nodes_index = 0
+var initial_pos := Vector2(40, 40)
+var option_index := 0
+var node_index := 0
+var all_nodes_index := 0
+var picker_mode := false
+var file_menu := false
 
 var root_node_ref
 var root_dict
-
-var picker_mode: bool = false
 var picker_from_node
 var picker_from_port
 var picker_position
@@ -55,7 +53,6 @@ func _ready():
 	var new_root_node = init_node.instantiate()
 	get_current_graph_edit().add_child(new_root_node)
 	connect_graph_edit_signal(get_current_graph_edit())
-
 	icon_search = plugin_icon_finder.instantiate()
 	icon_search.hide()
 	add_child.call_deferred(icon_search)
@@ -63,10 +60,8 @@ func _ready():
 	emoji_finder = plugin_emoji_finder.instantiate()
 	emoji_finder.hide()
 	add_child.call_deferred(emoji_finder)
-
 	saved_notification.hide()
 	save_progress_bar.hide()
-
 	$WelcomeWindow.on_recent_file = file_selected
 	$WelcomeWindow.load_recent_files()
 	
@@ -91,7 +86,6 @@ func _to_dict() -> Dictionary:
 	for node in get_graph_nodes():
 		if node.is_queued_for_deletion():
 			continue
-
 		list_nodes.append(node._to_dict())
 		if node.node_type == "NodeChoice":
 			for child in node.get_children():
@@ -107,10 +101,7 @@ func _to_dict() -> Dictionary:
 		save_progress_bar.value += 1
 		get_current_graph_edit().save_db()
 		save_progress_bar.value += 1
-
 		var db_file_path: String = get_current_graph_edit().db_file_path
-		if OS.get_name().to_lower() == "web":
-			db_file_path = db_file_path.trim_prefix("user://")
 
 		return {
 			"EditorVersion": ProjectSettings.get_setting(
@@ -119,7 +110,6 @@ func _to_dict() -> Dictionary:
 			"ListNodes": list_nodes,
 			"DBFile": db_file_path,
 		}
-
 	var characters = get_current_graph_edit().speakers
 	if get_current_graph_edit().speakers.size() <= 0:
 		characters.append({
@@ -128,7 +118,6 @@ func _to_dict() -> Dictionary:
 		})
 	
 	save_progress_bar.value += 1
-
 	return {
 		"EditorVersion": ProjectSettings.get_setting(
 			"application/config/version", "unknown"),
@@ -137,7 +126,6 @@ func _to_dict() -> Dictionary:
 		"Characters": characters,
 		"Variables": get_current_graph_edit().variables
 	}
-
 
 func file_selected(path, open_mode):
 	if not FileAccess.open(path, FileAccess.READ):
@@ -167,7 +155,6 @@ func file_selected(path, open_mode):
 		var new_root_node = init_node.instantiate()
 		graph_edit.add_child(new_root_node)
 		await save(true)
-
 	if not FileAccess.file_exists(Globals.HISTORY_FILE_PATH):
 		FileAccess.open(Globals.HISTORY_FILE_PATH, FileAccess.WRITE)
 	else:
@@ -189,19 +176,16 @@ func file_selected(path, open_mode):
 	
 	load_project(path)
 
-
 func get_root_dict(nodes):
 	for node in nodes:
 		if node.get("$type") == "NodeRoot":
 			return node
-
 
 func get_root_node_ref():
 	for node in get_graph_nodes():
 		if (!node.is_queued_for_deletion()
 			and node.id == root_dict.get("ID")):
 			return node
-
 
 func save(quick: bool = false):
 	save_progress_bar.value = 0
@@ -245,18 +229,15 @@ func load_project(path):
 	
 	var data := {}
 	data = JSON.parse_string(file)
-
 	if not data:
 		data = _to_dict()
 		save(true)
 	
 	live_dict = data
-
 	if "DBFile" in data:
 		var db_file := data["DBFile"] as String
 		# alert("DBFile: %s" % db_file)
 		get_current_graph_edit().load_db(db_file)
-
 	else:
 		# alert("DBFile: null")
 		graph_edit.speakers = data.get("Characters")
@@ -350,14 +331,13 @@ func load_project(path):
 		
 		save(true)
 		root_node_ref = get_root_node_ref()
-	
-	
+
 func get_node_by_id(id):
 	for node in get_graph_nodes():
 		if node.id == id:
 			return node
 	return null
-	
+
 func get_options_nodes(node_list, options_id):
 	var options = []
 	
@@ -366,11 +346,9 @@ func get_options_nodes(node_list, options_id):
 			options.append(node)
 	return options
 
-
 ###############################
 #  New node buttons callback  #
 ###############################
-
 func center_node_in_graph_edit(node):
 	var graph_edit = get_current_graph_edit()
 	if picker_mode:
@@ -436,7 +414,6 @@ func _on_graph_edit_connection_request(from, from_slot, to, to_slot):
 func _on_graph_edit_disconnection_request(from, from_slot, to, to_slot):
 	get_current_graph_edit().disconnect_node(from, from_slot, to, to_slot)
 
-
 func test_project(from_selected_node: bool = false):
 	await save(true)
 	
@@ -454,26 +431,19 @@ func test_project(from_selected_node: bool = false):
 ####################
 #  File selection  #
 ####################
-
 func new_file_select():
 	$FileDialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
-	if OS.get_name().to_lower() == "web":
-		$FileDialog.access = FileDialog.ACCESS_USERDATA
 	$FileDialog.title = "Create New File"
 	$FileDialog.ok_button_text = "Create"
 	$FileDialog.popup_centered()
 	var new_file_path = await $FileDialog.file_selected
-
 	if new_file_path:
 		FileAccess.open(new_file_path, FileAccess.WRITE)
 		return new_file_path
-	
 	return null
 
 func open_file_select():
 	$FileDialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
-	if OS.get_name().to_lower() == "web":
-		$FileDialog.access = FileDialog.ACCESS_USERDATA
 	$FileDialog.title = "Open File"
 	$FileDialog.ok_button_text = "Open"
 	$FileDialog.popup_centered()
@@ -492,20 +462,16 @@ func _on_graph_edit_connection_to_empty(from_node, from_port, _release_position)
 	picker_mode = true
 	$NoInteractions.show()
 
-
 func disable_picker_mode():
 	graph_node_selecter.hide()
 	picker_mode = false
 	$NoInteractions.hide()
 
-
 func _on_graph_node_selecter_focus_exited():
 	disable_picker_mode()
 
-
 func _on_graph_node_selecter_close_requested():
 	disable_picker_mode()
-
 
 func tab_changed(_idx):
 	inspector_panel.hide()
@@ -517,10 +483,8 @@ func tab_changed(_idx):
 		return
 	
 	new_graph_edit()
-	# cancel_file_btn.show()
 	$WelcomeWindow.show()
 	$NoInteractions.show()
-
 
 func connect_graph_edit_signal(graph_edit: GraphEdit) -> void:
 	graph_edit.connect("connection_to_empty", _on_graph_edit_connection_to_empty)
@@ -529,13 +493,10 @@ func connect_graph_edit_signal(graph_edit: GraphEdit) -> void:
 	graph_edit.connect("node_selected", inspector_panel.on_graph_node_selected)
 	graph_edit.connect("node_deselected", inspector_panel.on_graph_node_deselected)
 
-
 func tab_close_pressed(tab):
 	graph_edits.get_child(tab).queue_free()
 	tab_bar.remove_tab(tab)
 	tab_changed(tab)
-
-var file_menu := false
 
 func _on_file_id_pressed(id):
 	file_menu = true
@@ -547,7 +508,6 @@ func _on_file_id_pressed(id):
 				
 			new_graph_edit()
 			return await file_selected(new_file_path, 1)
-
 		1: # New file
 			var new_file_path = await new_file_select()
 			if new_file_path == null:
@@ -573,7 +533,6 @@ func new_graph_edit():
 	for ge in graph_edits.get_children():
 		ge.visible = ge == graph_edit
 
-
 func _on_new_file_btn_pressed():
 	$WelcomeWindow.hide()
 	var new_file_path = await new_file_select()
@@ -598,7 +557,6 @@ func _on_help_id_pressed(id):
 			OS.shell_open("https://github.com/atomic-junky/Monologue/wiki")
 		1:
 			OS.shell_open("https://rakugoteam.github.io/advanced-text-docs/2.0/Markdown/")
-
 
 func _on_file_dialog_canceled():
 	if file_menu:
