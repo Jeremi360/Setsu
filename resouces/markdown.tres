@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="MarkdownParser" load_steps=6 format=3 uid="uid://cfrtigrc03wot"]
+
+[ext_resource type="Script" path="res://addons/advanced-text/parsers/MarkdownParser.gd" id="1_ntcoy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pjn3u"]
+font_size = 22
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_occ2w"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nyk33"]
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dtjxa"]
+font_color = Color(0, 0, 0, 1)
+
+[resource]
+script = ExtResource("1_ntcoy")
+italics = "*"
+bold = "**"
+points = "-"
+headers = Array[LabelSettings]([SubResource("LabelSettings_pjn3u"), SubResource("LabelSettings_occ2w"), SubResource("LabelSettings_nyk33"), SubResource("LabelSettings_dtjxa")])
