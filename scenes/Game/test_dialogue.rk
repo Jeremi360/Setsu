@@ -1,0 +1,62 @@
+# This is only a test script you can remove it when you have your own
+
+test_menu:
+	character test "Test Character"
+	test.color = "#0967ff"
+	hide Godot
+
+	menu:
+		"test say" > test_say
+		"test ask" > test_ask
+		"test notifications" > test_notifications
+		"test show & hide" > test_show
+		"test at" > test_at
+
+test_say:
+	"Narrator says something"
+	test "Test character is saying something its @color=<test.color> {name} should be colored"
+	jump test_menu
+
+test_ask:
+	test_var = ? test "Give some answer" "Some default answer"
+	"You gave answer: @color=<test.color> {<test_var>}"
+	jump test_menu
+
+test_show:
+	"Click next and godot logo should appear"
+	show Godot
+	"Click next and logo should become even more blue"
+	show Godot Red Blue
+	"Click next and godot logo should become red"
+	show Godot Red
+	"Click next and godot logo should become green"
+	show Godot Green
+	"Click next and godot logo should hide"
+	hide Godot
+	jump test_menu
+
+test_at:
+	"Click next and godot logo should appear"
+	show Godot
+	at% 50 50
+	"Click next and godot move to 148 156"
+	at 148 156
+	"Click next and godot move to 200 on y axis"
+	at y 200
+	"Click next and godot move by 50 on x axis"
+	at x +50
+	"Click next and godot move to 25% 25% procent of window"
+	at% 25 25
+	"Click next and godot logo should hide"
+	hide Godot
+	jump test_menu
+
+test_notifications:
+	"Click next and notification should appear"
+	notif: "some notification"
+	"You should see notification in top right corner"
+	"Click next and notification should appear, but for shorter time"
+	notif 0.3: "some shorter time notification"
+	jump test_menu
+
+

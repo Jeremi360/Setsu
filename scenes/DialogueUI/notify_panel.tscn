@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://cahg2fobtnlcv"]
+
+[ext_resource type="Script" path="res://scenes/DialogueUI/NotifyPanel.gd" id="1_vufgk"]
+[ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="2_7mnof"]
+[ext_resource type="Resource" uid="uid://6ioam3qiqsqa" path="res://addons/visualnovelkit/default_markups/def_markdown.tres" id="3_pfbci"]
+
+[node name="NotifyPanel" type="Panel" node_paths=PackedStringArray("notification_label", "timer", "root")]
+self_modulate = Color(1, 1, 1, 0.5)
+anchors_preset = -1
+anchor_left = 0.687
+anchor_right = 1.0
+anchor_bottom = 0.082
+offset_left = -0.360046
+offset_bottom = -0.0400009
+grow_horizontal = 2
+script = ExtResource("1_vufgk")
+notification_label = NodePath("DialogueLabel")
+timer = NodePath("Timer")
+root = NodePath(".")
+
+[node name="DialogueLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Text of some dialogue
+"
+fit_content = true
+script = ExtResource("2_7mnof")
+_text = "Text of some dialogue
+"
+parser = ExtResource("3_pfbci")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

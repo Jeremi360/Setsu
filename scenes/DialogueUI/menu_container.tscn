@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://w2n5oa7ar7vi"]
+
+[ext_resource type="Script" path="res://scenes/DialogueUI/ProcentContainer.gd" id="1_rupor"]
+[ext_resource type="Script" path="res://scenes/DialogueUI/MenuBox.gd" id="2_x42km"]
+
+[node name="MenuScrollContainer" type="ScrollContainer"]
+custom_minimum_size = Vector2(576, 504)
+script = ExtResource("1_rupor")
+
+[node name="MenuBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_x42km")
