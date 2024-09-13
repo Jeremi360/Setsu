@@ -36,6 +36,10 @@ addons/visual_novel_kit/at_predefind/right=75.0
 addons/visual_novel_kit/at_predefind/top=25.0
 addons/visual_novel_kit/at_predefind/bottom=75.0
 
+[audio]
+
+buses/default_bus_layout="res://resouces/default_bus_layout.tres"
+
 [autoload]
 
 AdvancedText="*res://addons/advanced-text/AdvancedText.gd"
@@ -48,6 +52,7 @@ ProjectMusicController="*res://addons/rakugo_game_template/Autoloads/ProjectMusi
 UISoundManager="*res://addons/rakugo_game_template/Autoloads/UISoundManager/UISoundManager.tscn"
 Transitions="*res://addons/rakugo_game_template/Autoloads/Transitions/transitions.tscn"
 RKSShow="*res://addons/visualnovelkit/rks_extensions/rks_show.gd"
+Globals="*res://scripts/Globals.gd"
 
 [display]
 
@@ -145,4 +150,4 @@ textures/vram_compression/import_s3tc_bptc=true
 viewport/transparent_background=true
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true
-environment/defaults/default_environment="res://default_env.tres"
+environment/defaults/default_environment="res://resouces/default_env.tres"

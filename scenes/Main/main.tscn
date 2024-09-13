@@ -1,4 +1,8 @@
-[gd_scene format=3 uid="uid://c7jvglcdhmbci"]
+[gd_scene load_steps=4 format=3 uid="uid://c7jvglcdhmbci"]
+
+[ext_resource type="PackedScene" uid="uid://cb5xd0k4auijn" path="res://scenes/GraphNodes/init_node.tscn" id="1_gctnr"]
+[ext_resource type="PackedScene" uid="uid://r1bosptqaj1e" path="res://scenes/Inspector/inspector.tscn" id="1_sydpr"]
+[ext_resource type="PackedScene" uid="uid://c0hncdxf5j4ji" path="res://scenes/Inspector/init_inspector.tscn" id="3_dbpi0"]
 
 [node name="Main" type="Panel"]
 anchors_preset = 15
@@ -46,109 +50,29 @@ size_flags_vertical = 3
 current_tab = 0
 tabs_visible = false
 
-[node name="RakuGraphEdit" type="GraphEdit" parent="ModsContainer/Editor/TabsContainer"]
+[node name="HBoxContainer" type="HSplitContainer" parent="ModsContainer/Editor/TabsContainer"]
 layout_mode = 2
-scroll_offset = Vector2(-40, -40)
+split_offset = -300
+metadata/_tab_index = 0
+
+[node name="RakuGraphEdit" type="GraphEdit" parent="ModsContainer/Editor/TabsContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 right_disconnects = true
 connection_lines_curvature = 0.0
 show_zoom_label = true
 show_arrange_button = false
-metadata/_tab_index = 0
 
-[node name="Inspector" type="Panel" parent="ModsContainer/Editor/TabsContainer/RakuGraphEdit"]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -456.0
-offset_right = -30.0
-offset_bottom = -27.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ModsContainer/Editor/TabsContainer/RakuGraphEdit/Inspector"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -15.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="InspectorTile" type="HBoxContainer" parent="ModsContainer/Editor/TabsContainer/RakuGraphEdit/Inspector/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="ModsContainer/Editor/TabsContainer/RakuGraphEdit/Inspector/VBoxContainer/InspectorTile"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Inspector"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="ModsContainer/Editor/TabsContainer/RakuGraphEdit/Inspector/VBoxContainer/InspectorTile"]
-layout_mode = 2
-text = "close
-"
-
-[node name="InitInspector" type="VBoxContainer" parent="ModsContainer/Editor/TabsContainer/RakuGraphEdit/Inspector/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="ModsContainer/Editor/TabsContainer/RakuGraphEdit/Inspector/VBoxContainer/InitInspector"]
-layout_mode = 2
-text = "Init"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ModsContainer/Editor/TabsContainer/RakuGraphEdit/Inspector/VBoxContainer/InitInspector"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="DropdownVars" type="CheckButton" parent="ModsContainer/Editor/TabsContainer/RakuGraphEdit/Inspector/VBoxContainer/InitInspector/VBoxContainer"]
-layout_mode = 2
-text = "Edit Variables
-"
-alignment = 1
-
-[node name="ScrollContVars" type="ScrollContainer" parent="ModsContainer/Editor/TabsContainer/RakuGraphEdit/Inspector/VBoxContainer/InitInspector/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="VarsContainer" type="VBoxContainer" parent="ModsContainer/Editor/TabsContainer/RakuGraphEdit/Inspector/VBoxContainer/InitInspector/VBoxContainer/ScrollContVars"]
-layout_mode = 2
-
-[node name="DropdownChars" type="CheckButton" parent="ModsContainer/Editor/TabsContainer/RakuGraphEdit/Inspector/VBoxContainer/InitInspector/VBoxContainer"]
-layout_mode = 2
-text = "Edit Characters
-"
-alignment = 1
-
-[node name="ScrollContChars" type="ScrollContainer" parent="ModsContainer/Editor/TabsContainer/RakuGraphEdit/Inspector/VBoxContainer/InitInspector/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="CharsContainer" type="VBoxContainer" parent="ModsContainer/Editor/TabsContainer/RakuGraphEdit/Inspector/VBoxContainer/InitInspector/VBoxContainer/ScrollContChars"]
-layout_mode = 2
-
-[node name="InitNode" type="GraphNode" parent="ModsContainer/Editor/TabsContainer/RakuGraphEdit"]
+[node name="InitNode" parent="ModsContainer/Editor/TabsContainer/HBoxContainer/RakuGraphEdit" instance=ExtResource("1_gctnr")]
 layout_mode = 0
-offset_left = 133.0
-offset_top = 185.0
-offset_right = 435.0
-offset_bottom = 354.0
-mouse_filter = 1
-position_offset = Vector2(93, 145)
-title = "Init"
+offset_left = 66.0
+offset_top = -366.0
+offset_right = 368.0
+offset_bottom = -272.0
+position_offset = Vector2(66, -366)
 
-[node name="Label" type="Label" parent="ModsContainer/Editor/TabsContainer/RakuGraphEdit"]
+[node name="Inspector" parent="ModsContainer/Editor/TabsContainer/HBoxContainer" instance=ExtResource("1_sydpr")]
 layout_mode = 2
-offset_left = 151.0
-offset_top = 228.0
-offset_right = 417.0
-offset_bottom = 251.0
-text = "Select to edit vars and characters"
-horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="InitInspector" parent="ModsContainer/Editor/TabsContainer/HBoxContainer/Inspector" instance=ExtResource("3_dbpi0")]
+layout_mode = 2
