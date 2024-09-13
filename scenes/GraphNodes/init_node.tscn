@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://cb5xd0k4auijn"]
+
+[ext_resource type="PackedScene" uid="uid://capjjlxxqe3o3" path="res://scenes/GraphNodes/raku_node.tscn" id="1_ywagr"]
+[ext_resource type="Script" path="res://scenes/GraphNodes/init_node.gd" id="2_5jph7"]
+[ext_resource type="Texture2D" uid="uid://bt3ujxbybvybj" path="res://graphics/icons/circle-play-solid-white.svg" id="3_5q6gs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cr4kg"]
+content_margin_left = 10.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.768627, 0.627451, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gure4"]
+content_margin_left = 10.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.768627, 0.627451, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[node name="InitNode" instance=ExtResource("1_ywagr")]
+theme_override_styles/titlebar = SubResource("StyleBoxFlat_cr4kg")
+theme_override_styles/titlebar_selected = SubResource("StyleBoxFlat_gure4")
+title = "InitNode"
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("2_5jph7")
+type = 2
+
+[node name="CloseBtn" parent="Hack" index="0"]
+offset_left = 275.0
+offset_top = 0.0
+offset_right = 299.0
+offset_bottom = 24.0
+
+[node name="Icon" parent="Hack" index="1"]
+position = Vector2(90, 15)
+texture = ExtResource("3_5q6gs")
+
+[node name="Label" type="Label" parent="." index="2"]
+layout_mode = 2
+text = "Select to edit vars and characters"
+horizontal_alignment = 1
+vertical_alignment = 1
