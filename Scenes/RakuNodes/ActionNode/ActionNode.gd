@@ -1,9 +1,6 @@
 @icon("res://Assets/Icons/NodesIcons/Cog.svg")
-
 class_name ActionNode
-
 extends MonologueGraphNode
-
 
 @onready var option_container = $OptionMarginContainer
 @onready var variable_container = $VariableMarginContainer

@@ -1,6 +1,7 @@
 extends Window
 
-@onready var control_node := Globals.main
+var control_node : Main:
+	get: return Globals.main
 
 func _ready():
 	hide()

@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bb3x8klcnp57t"]
+[gd_scene load_steps=9 format=3 uid="uid://bb3x8klcnp57t"]
 
 [ext_resource type="Script" path="res://Scenes/Windows/WelcomeWindow/WelcomeWindow.gd" id="1_lwilb"]
+[ext_resource type="PackedScene" uid="uid://dqp3uifnpuc3b" path="res://Scenes/Windows/WelcomeWindow/RecentFileButton.tscn" id="2_2uoyw"]
 [ext_resource type="Texture2D" uid="uid://uyec6noccly6" path="res://Assets/Icons/new_file_icon.png" id="2_rymve"]
 [ext_resource type="Texture2D" uid="uid://t1i3wy037vsu" path="res://Assets/Icons/folder_icon.png" id="3_ktkps"]
 [ext_resource type="Texture2D" uid="uid://c7vdr4e0mxst6" path="res://Assets/Icons/close_icon.png" id="4_gaqb0"]
@@ -34,6 +35,7 @@ borderless = true
 always_on_top = true
 transparent = true
 script = ExtResource("1_lwilb")
+recent_file_button = ExtResource("2_2uoyw")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 15
@@ -99,3 +101,5 @@ text = "v.X.X.X"
 label_settings = SubResource("LabelSettings_7mcdy")
 
 [connection signal="pressed" from="PanelContainer/CenterContainer/VBoxContainer2/HBoxContainer/NewFileBtn" to="." method="_on_new_file_btn_pressed"]
+[connection signal="pressed" from="PanelContainer/CenterContainer/VBoxContainer2/HBoxContainer/OpenFileBtn" to="." method="_on_open_file_btn_pressed"]
+[connection signal="pressed" from="PanelContainer/CenterContainer/VBoxContainer2/HBoxContainer/CancelFileBtn" to="." method="hide"]

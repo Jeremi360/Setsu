@@ -54,7 +54,9 @@ func _on_new_file_btn_pressed() -> void:
 	Globals.file_dialog.ok_button_text = "Crate"
 	Globals.file_dialog.popup_centered()
 	var path := await Globals.file_selected as String
-	if path: Globals.main.file_selected(path, 0)
+	if path:
+		Globals.main.file_selected(path, 0)
+		Globals.no_interactions.hide()
 	else: show()
 
 func _on_open_file_btn_pressed() -> void:
@@ -65,5 +67,7 @@ func _on_open_file_btn_pressed() -> void:
 	# Globals.file_dialog.ok_button_text = "Open"
 	Globals.file_dialog.popup_centered()
 	var path := await Globals.file_selected as String
-	if path: Globals.main.file_selected(path, 1)
+	if path:
+		Globals.main.file_selected(path, 1)
+		Globals.no_interactions.hide()
 	else: show()

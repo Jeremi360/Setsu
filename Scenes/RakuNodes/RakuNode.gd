@@ -15,7 +15,7 @@ func _to_dict():
 func _update(_panel = null):
 	pass
 
-func _common_update(_panel = null):
+func _common_update(_panel: MonologueNodePanel = null):
 	size.y = 0
 	
 	if _panel:

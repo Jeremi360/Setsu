@@ -1,5 +1,4 @@
 class_name OptionNode
-
 extends PanelContainer
 
 @onready var sentence_node = $MarginContainer/MainContainer/SentenceContainer/TextEdit

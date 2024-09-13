@@ -2,12 +2,9 @@
 class_name ChoiceNodePanel
 extends MonologueNodePanel
 
-const arrow_texture01 = preload("res://Assets/Icons/NodesIcons/Arrow01.svg")
-const arrow_texture02 = preload("res://Assets/Icons/NodesIcons/Arrow02.svg")
-
 @onready var options_container = $OptionsContainer
 
-@export var option_panel : PackedScene
+@export var option_panel: PackedScene
 
 func _from_dict(dict):
 	id = dict.get("ID")
@@ -24,7 +21,7 @@ func _from_dict(dict):
 
 
 func new_option():
-	var option = option_panel.instantiate()
+	var option: OptionNode = option_panel.instantiate()
 	option.panel_node = self
 	option.graph_node = graph_node
 	

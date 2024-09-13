@@ -1,20 +1,18 @@
+class_name OptionReference
 extends PanelContainer
-
 
 @onready var option = $MainContainer/VBoxContainer/Option
 @onready var sentence_preview = $MainContainer/VBoxContainer/SentencePreview
 
 var id = UUID.v4()
-var node_type = "NodeOption"
-var sentence = ""
-var enable = true
-var one_shot = false
-
+var node_type := "NodeOption"
+var sentence := ""
+var enable := true
+var one_shot := false
 
 func _ready():
 	var index = get_parent().get_children().find(self) + 1
 	option.text = "Option " + str(index)
-
 
 func _to_dict():
 	var graph_edit = get_parent().get_parent()
@@ -30,7 +28,6 @@ func _to_dict():
 		"Enable": enable,
 		"OneShot": one_shot
 	}
-
 
 func _from_dict(dict):
 	id = dict.get("ID")

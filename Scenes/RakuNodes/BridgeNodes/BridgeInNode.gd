@@ -1,7 +1,5 @@
 @icon("res://Assets/Icons/NodesIcons/Link.svg")
-
 class_name BridgeInNode
-
 extends MonologueGraphNode
 
 @onready var number_selector: SpinBox = $MarginContainer/HBoxContainer/LinkNumber

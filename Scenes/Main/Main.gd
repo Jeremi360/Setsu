@@ -21,7 +21,7 @@ extends Control
 @export var event_node: PackedScene
 
 @onready var tab_bar: TabBar = %TabBar
-@onready var graph_edits: TabContainer = %GraphEdits
+@onready var tabs: TabContainer = %Tabs
 @onready var inspector_panel := %Inspector
 @onready var graph_node_selecter := %GraphNodeSelector
 @onready var save_button: Button = %SaveBtn
@@ -66,6 +66,7 @@ func _ready():
 	$WelcomeWindow.load_recent_files()
 	
 	$WelcomeWindow.show()
+	Globals.no_interactions = $NoInteractions
 	$NoInteractions.show()
 
 func _shortcut_input(event):
@@ -73,14 +74,13 @@ func _shortcut_input(event):
 		save(false)
 
 func get_current_graph_edit() -> GraphEdit:
-	return graph_edits.get_child(tab_bar.current_tab)
+	return tabs.get_child(tabs.current_tab)
 
 func get_graph_nodes() -> Array[Node]:
 	return get_current_graph_edit().get_children()
 
 func _to_dict() -> Dictionary:
-	var list_nodes = []
-	
+	var list_nodes := []
 	save_progress_bar.max_value = get_graph_nodes().size() + 1
 	
 	for node in get_graph_nodes():
@@ -128,15 +128,11 @@ func _to_dict() -> Dictionary:
 	}
 
 func file_selected(path, open_mode):
-	if not FileAccess.open(path, FileAccess.READ):
-		return
+	if not FileAccess.open(path, FileAccess.READ): return
 	
-	for ge in graph_edits.get_children():
-		if not ge is GraphEdit:
-			continue
-		
-		if ge.file_path == path:
-			return
+	for ge in tabs.get_children():
+		if ge is not GraphEdit: continue
+		if ge.file_path == path: return
 	
 	$NoInteractions.hide()
 	
@@ -155,6 +151,7 @@ func file_selected(path, open_mode):
 		var new_root_node = init_node.instantiate()
 		graph_edit.add_child(new_root_node)
 		await save(true)
+
 	if not FileAccess.file_exists(Globals.HISTORY_FILE_PATH):
 		FileAccess.open(Globals.HISTORY_FILE_PATH, FileAccess.WRITE)
 	else:
@@ -334,8 +331,8 @@ func load_project(path):
 
 func get_node_by_id(id):
 	for node in get_graph_nodes():
-		if node.id == id:
-			return node
+		if node is not MonologueGraphNode: continue
+		if node.id == id: return node
 	return null
 
 func get_options_nodes(node_list, options_id):
@@ -476,8 +473,8 @@ func _on_graph_node_selecter_close_requested():
 func tab_changed(_idx):
 	inspector_panel.hide()
 	if get_current_tab_name() != "+":
-		for ge in graph_edits.get_children():
-			ge.visible = graph_edits.get_child(
+		for ge in tabs.get_children():
+			ge.visible = tabs.get_child(
 				tab_bar.current_tab) == ge
 			
 		return
@@ -494,7 +491,7 @@ func connect_graph_edit_signal(graph_edit: GraphEdit) -> void:
 	graph_edit.connect("node_deselected", inspector_panel.on_graph_node_deselected)
 
 func tab_close_pressed(tab):
-	graph_edits.get_child(tab).queue_free()
+	tabs.get_child(tab).queue_free()
 	tab_bar.remove_tab(tab)
 	tab_changed(tab)
 
@@ -527,10 +524,10 @@ func new_graph_edit():
 	graph_edit.name = "new"
 	connect_graph_edit_signal(graph_edit)
 	
-	graph_edits.add_child(graph_edit)
+	tabs.add_child(graph_edit)
 	graph_edit.add_child(new_root_node)
 	
-	for ge in graph_edits.get_children():
+	for ge in tabs.get_children():
 		ge.visible = ge == graph_edit
 
 func _on_new_file_btn_pressed():
