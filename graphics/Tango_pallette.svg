@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="270" height="10" version="1.0">
+  <path fill="#fce94f" d="M0 0h10v10H0z"/>
+  <path fill="#edd400" d="M10 0h10v10H10z"/>
+  <path fill="#2e3436" d="M260 0h10v10h-10z"/>
+  <path fill="#555753" d="M250 0h10v10h-10z"/>
+  <path fill="#c4a000" d="M20 0h10v10H20z"/>
+  <path fill="#8ae234" d="M29.999998 0h10v10h-10z"/>
+  <path fill="#73d216" d="M40 0h10v10H40z"/>
+  <path fill="#4e9a06" d="M50 0h10v10H50z"/>
+  <path fill="#fcaf3e" d="M60 0h10v10H60z"/>
+  <path fill="#f57900" d="M70 0h10v10H70z"/>
+  <path fill="#ce5c00" d="M80 0h10v10H80z"/>
+  <path fill="#729fcf" d="M90 0h10v10H90z"/>
+  <path fill="#3465a4" d="M100 0h10v10h-10z"/>
+  <path fill="#204a87" d="M110 0h10v10h-10z"/>
+  <path fill="#ad7fa8" d="M120 0h10v10h-10z"/>
+  <path fill="#75507b" d="M130 0h10v10h-10z"/>
+  <path fill="#5c3566" d="M140 0h10v10h-10z"/>
+  <path fill="#e9b96e" d="M150 0h10v10h-10z"/>
+  <path fill="#c17d11" d="M160 0h10v10h-10z"/>
+  <path fill="#8f5902" d="M170 0h10v10h-10z"/>
+  <path fill="#ef2929" d="M180 0h10v10h-10z"/>
+  <path fill="#c00" d="M190 0h10v10h-10z"/>
+  <path fill="#a40000" d="M200 0h10v10h-10z"/>
+  <path fill="#eeeeec" d="M210 0h10v10h-10z"/>
+  <path fill="#d3d7cf" d="M220 0h10v10h-10z"/>
+  <path fill="#babdb6" d="M230 0h10v10h-10z"/>
+  <path fill="#888a85" d="M240 0h10v10h-10z"/>
+</svg>
