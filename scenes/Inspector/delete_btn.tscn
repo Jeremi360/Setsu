@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtgm4p1rnmjur"]
+
+[ext_resource type="FontFile" uid="uid://bbfeoo2kuf30n" path="res://addons/material-design-icons/fonts/material_design_icons.ttf" id="1_byxrm"]
+[ext_resource type="Script" path="res://addons/material-design-icons/nodes/MaterialButton.gd" id="2_5i0yf"]
+
+[node name="DeleteBtn" type="Button"]
+theme_override_colors/font_hover_color = Color(0.937255, 0.160784, 0.160784, 1)
+theme_override_colors/font_pressed_color = Color(0.643137, 0, 0, 1)
+theme_override_colors/font_color = Color(0.8, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_byxrm")
+theme_override_font_sizes/font_size = 24
+text = "󰗨"
+flat = true
+script = ExtResource("2_5i0yf")
+icon_name = "delete-forever"
+icon_size = 24

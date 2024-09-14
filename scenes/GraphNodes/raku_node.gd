@@ -23,7 +23,6 @@ enum {
 var id := ResourceUID.create_id()
 var next_node_id: int
 
-
 func to_raku() -> String:
 	return "# unsported node type %s" % str(type)
 
