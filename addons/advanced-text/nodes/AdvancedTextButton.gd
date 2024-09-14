@@ -1,9 +1,10 @@
+@icon("res://addons/advanced-text/icons/AdvancedTextButton.svg")
 @tool
-extends AdvancedTextLabel
 
 ## This is a AdvancedTextLabel that behaves like a button
 ## @tutorial: https://rakugoteam.github.io/advanced-text-docs/2.0/AdvancedTextCheckButton/
 class_name AdvancedTextButton
+extends AdvancedTextLabel
 
 ## Emitted when button is pressed
 signal pressed

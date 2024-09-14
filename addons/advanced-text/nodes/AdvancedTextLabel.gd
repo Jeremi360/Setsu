@@ -43,9 +43,15 @@ signal custom_link(url:String)
 	
 	get: return parser
 
+var font_size : int:
+	get: return theme.get_font_size(get_class(), &"normal")
+
 func _ready():
 	bbcode_enabled = true
 	meta_clicked.connect(_on_meta)
+	if not _text:
+		custom_minimum_size = Vector2.ONE * font_size
+
 	_parse_text()
 
 func _parse_text() -> void:

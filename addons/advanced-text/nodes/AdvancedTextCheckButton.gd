@@ -1,10 +1,10 @@
 @tool
-extends AdvancedTextButton
-
+@icon("res://addons/advanced-text/icons/AdvancedTextCheckButton.svg")
 ## This is AdvancedTextLabel that baves like toggle switch
 ## This node needs Godot Material Icons addon to work
 ## @tutorial: https://rakugoteam.github.io/advanced-text-docs/2.0/AdvancedTextButton/
 class_name AdvancedTextCheckButton
+extends AdvancedTextButton
 
 ## Size of Matrial Icon that will be used as toggle icon
 @export var toggle_icon_size := 24:

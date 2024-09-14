@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bywn6w6ka1sdv"
-path="res://.godot/imported/icon.png-827e0de14854cce41896eca90072e8b3.ctex"
+uid="uid://high0l4chehr"
+path="res://.godot/imported/AdvancedTextButton.svg-ad287b59b479dd5b39198487f27781b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/external/icon.png"
-dest_files=["res://.godot/imported/icon.png-827e0de14854cce41896eca90072e8b3.ctex"]
+source_file="res://addons/advanced-text/icons/AdvancedTextButton.svg"
+dest_files=["res://.godot/imported/AdvancedTextButton.svg-ad287b59b479dd5b39198487f27781b2.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false
