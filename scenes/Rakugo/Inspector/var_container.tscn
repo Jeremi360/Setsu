@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjy8f76uhulg7"]
+
+[ext_resource type="PackedScene" uid="uid://dtgm4p1rnmjur" path="res://scenes/Inspector/delete_btn.tscn" id="1_3g6bb"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_4snt3"]
+color = Color(1, 1, 1, 1)
+grow_begin = 3.0
+grow_end = 3.0
+thickness = 2
+vertical = true
+
+[node name="VarContainer" type="HBoxContainer"]
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 2
+text = "Name"
+
+[node name="NameEdit" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "name"
+
+[node name="VSeparator" type="VSeparator" parent="."]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_4snt3")
+
+[node name="Value" type="Label" parent="."]
+layout_mode = 2
+text = "Value"
+
+[node name="ValueEdit" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "value"
+
+[node name="DeleteBtn" parent="." instance=ExtResource("1_3g6bb")]
+layout_mode = 2

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://5dkxigm5yykt"]
+
+[ext_resource type="Texture2D" uid="uid://bt3ujxbybvybj" path="res://graphics/icons/Rakugo/circle-play-solid-white.svg" id="1_3m3ha"]
+[ext_resource type="FontFile" uid="uid://bbfeoo2kuf30n" path="res://addons/material-design-icons/fonts/material_design_icons.ttf" id="3_4w2ay"]
+[ext_resource type="Script" path="res://addons/material-design-icons/nodes/MaterialButton.gd" id="4_dq1eu"]
+[ext_resource type="Texture2D" uid="uid://dj6xpd3c8cnx8" path="res://graphics/icons/code-commit-solid.svg" id="5_2wm0d"]
+
+[node name="SetsuNode" type="GraphNode"]
+offset_right = 302.0
+offset_bottom = 94.0
+mouse_filter = 1
+theme_override_icons/port = ExtResource("1_3m3ha")
+position_offset = Vector2(93, 145)
+title = "RakuNode"
+
+[node name="Hack" type="Node2D" parent="."]
+
+[node name="CloseBtn" type="Button" parent="Hack"]
+offset_left = 266.0
+offset_top = 4.0
+offset_right = 290.0
+offset_bottom = 28.0
+theme_override_fonts/font = ExtResource("3_4w2ay")
+theme_override_font_sizes/font_size = 16
+text = "󱎘"
+flat = true
+script = ExtResource("4_dq1eu")
+icon_name = "close-thick"
+
+[node name="Icon" type="Sprite2D" parent="Hack"]
+position = Vector2(103, 17)
+texture = ExtResource("5_2wm0d")

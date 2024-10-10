@@ -1,0 +1,132 @@
+[gd_scene load_steps=8 format=3 uid="uid://c383664b806ic"]
+
+[ext_resource type="PackedScene" uid="uid://dtgm4p1rnmjur" path="res://scenes/Inspector/delete_btn.tscn" id="1_dufwp"]
+[ext_resource type="StyleBox" uid="uid://byqyn21c5ikih" path="res://resouces/styles/inspector_subpanel.tres" id="2_4hnhp"]
+[ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextButton.gd" id="3_d77mx"]
+[ext_resource type="Resource" uid="uid://cfrtigrc03wot" path="res://resouces/markdown.tres" id="4_alknj"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_4snt3"]
+color = Color(1, 1, 1, 1)
+grow_begin = 3.0
+grow_end = 3.0
+thickness = 2
+vertical = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_64ayr"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vuvkh"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="CharContainer" type="VBoxContainer"]
+
+[node name="CharacterMainContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Tag" type="Label" parent="CharacterMainContainer"]
+layout_mode = 2
+text = "Tag"
+
+[node name="TagEdit" type="LineEdit" parent="CharacterMainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "tag"
+
+[node name="VSeparator" type="VSeparator" parent="CharacterMainContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_4snt3")
+
+[node name="Value" type="Label" parent="CharacterMainContainer"]
+layout_mode = 2
+text = "Name to Display"
+
+[node name="NameEdit" type="LineEdit" parent="CharacterMainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "name to display"
+
+[node name="DeleteBtn" parent="CharacterMainContainer" instance=ExtResource("1_dufwp")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Character Variables"
+
+[node name="VarsContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VarsContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_4hnhp")
+
+[node name="VarContainer" type="HBoxContainer" parent="VarsContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="VarsContainer/PanelContainer/VarContainer"]
+layout_mode = 2
+text = "Name"
+
+[node name="NameEdit" type="LineEdit" parent="VarsContainer/PanelContainer/VarContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "name"
+
+[node name="VSeparator" type="VSeparator" parent="VarsContainer/PanelContainer/VarContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_4snt3")
+
+[node name="Value" type="Label" parent="VarsContainer/PanelContainer/VarContainer"]
+layout_mode = 2
+text = "Value"
+
+[node name="ValueEdit" type="LineEdit" parent="VarsContainer/PanelContainer/VarContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "value"
+
+[node name="DeleteBtn" parent="VarsContainer/PanelContainer/VarContainer" instance=ExtResource("1_dufwp")]
+layout_mode = 2
+
+[node name="AddCharVar" type="RichTextLabel" parent="VarsContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_64ayr")
+theme_override_styles/normal = SubResource("StyleBoxFlat_vuvkh")
+bbcode_enabled = true
+text = "Add Character Variable [color=green][font_size= 16][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󱇬[/font][/font_size][/color]"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("3_d77mx")
+toggle_mode = true
+button_pressed = true
+_text = "Add Character Variable @color=green{[icon:plus-thick, 16]}"
+parser = ExtResource("4_alknj")

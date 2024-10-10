@@ -12,12 +12,6 @@ export.cfg
 .mono/
 data_*/
 mono_crash.*.json
-addons/ColorPreview/
-addons/script-ide
-addons/open_external_editor
-addons/quick_layout_changer
-addons/globalize-plugins
-# addons/dictionary_inspector - nned this plugin
 
 # Exports
 *.pck
@@ -27,3 +21,4 @@ addons/globalize-plugins
 
 # VSCode
 .vscode/
+plugins/monoglogue_plugin.txt
