@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="SetsuPlugin" load_steps=9 format=3 uid="uid://b2kb2w548orfd"]
+
+[ext_resource type="Script" path="res://scripts/SetsuNodeDef.gd" id="1_iakeh"]
+[ext_resource type="Texture2D" uid="uid://bfmar75d3qkc5" path="res://graphics/icons/Rakugo/circle-play-solid.svg" id="2_ckm6c"]
+[ext_resource type="Script" path="res://scripts/SetsuPlugin.gd" id="2_p174g"]
+[ext_resource type="PackedScene" uid="uid://cb5xd0k4auijn" path="res://scenes/Rakugo/GraphNodes/init_node.tscn" id="3_4vakw"]
+[ext_resource type="PackedScene" uid="uid://c0hncdxf5j4ji" path="res://scenes/Rakugo/Inspector/init_inspector.tscn" id="4_aytng"]
+[ext_resource type="StyleBox" uid="uid://bm8pwee8mitm3" path="res://resouces/styles/rakugo/init_node.tres" id="5_bha6k"]
+[ext_resource type="StyleBox" uid="uid://bmf5belem100" path="res://resouces/styles/rakugo/init_node_selected.tres" id="6_5frua"]
+
+[sub_resource type="Resource" id="Resource_rd6vg"]
+script = ExtResource("1_iakeh")
+name = "InitNode"
+icon = ExtResource("2_ckm6c")
+style_normal = ExtResource("5_bha6k")
+style_selected = ExtResource("6_5frua")
+node_graph = ExtResource("3_4vakw")
+node_inspector = ExtResource("4_aytng")
+
+[resource]
+script = ExtResource("2_p174g")
+name = "Rakugo Dialogue System"
+description = "Rakugo Dialogue System"
+version = "1.0"
+nodes_defs = Array[ExtResource("1_iakeh")]([SubResource("Resource_rd6vg")])
